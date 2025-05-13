@@ -4,10 +4,10 @@ Build a competitive 500g class sumo robot from Cytron using a PS2 controller for
 # Overview
 | Component           | Details/Notes                                                         |
 | ------------------- | --------------------------------------------------------------------- |
-| **Microcontroller** | Motion 2350 Pro( Dual-core Arm Cortex-M33 processor)                  |
+| **Microcontroller** | Motion 2350 Pro( Dual-core Arm Cortex-M33 processor)(Arduino use core0|                  
 | **Motors**          | 12V 980RPM 2.3kgfcm GM25 High Power Brushed DC Geared Moto            |
 | **Power Source**    | Mini LiPo Rechargeable Battery 3S 11.1V 2000mAH                       |
-| **Controller**      | PS2 wireless controller + receiver module                             |
+| **Controller**      | PS2 wireless controller + receiver module (core 1)                    |
 
 # Workflow
 ![Flowchart](https://github.com/user-attachments/assets/5b87a6d4-7cbd-4747-b2f1-e8147ba125fd)
@@ -21,10 +21,10 @@ Build a competitive 500g class sumo robot from Cytron using a PS2 controller for
 | Centered                | No motion                | 0           | 0            |
 | Push forward            | Go forward               | +255        | +255         |
 | Pull backward           | Go backward              | -255        | -255         |
-| Forward + right         | Curve right while moving | +255        | +100         |
-| Forward + left          | Curve left while moving  | +100        | +200         |
-| Backward + right        | Curve right while moving | +200        | +100         |
-| Backward + left         | Curve left while moving  | +100        | +200         |
+| Forward + right         | Curve right while moving | +255        | -85          |
+| Forward + left          | Curve left while moving  | -85         | +255         |
+| Backward + right        | Curve right while moving | +255        | -85          |
+| Backward + left         | Curve left while moving  | -85         | +255         |
 
 
 # Setup & Configurations
@@ -32,8 +32,8 @@ Build a competitive 500g class sumo robot from Cytron using a PS2 controller for
 | ------------| --------------------------------------------------------------------- |
 | **8**       | Left Motor Forward(Red)                                               |
 | **9**       | Left Motor Backward(Black)                                            |
-| **10**      | Right Motor Forward(Red)                                              |
-| **11**      | Right Motor Backward(Black)                                           |
+| **14**      | Right Motor Forward(Red)                                              |
+| **15**      | Right Motor Backward(Black)                                           |
 | **24**      | D+ USB Controller                                                     |
 | **25**      | D- USB Controller                                                     |
 | **+**       | Power(Red)                                                            |
