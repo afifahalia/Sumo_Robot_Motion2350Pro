@@ -18,13 +18,13 @@ Build a competitive 500g class sumo robot from Cytron using a PS2 controller for
 
 | Joystick Input          | Action                   | left\_speed | right\_speed |
 | ----------------------- | ------------------------ | ----------- | ------------ |
-| Centered (128,128)      | No motion                | 0           | 0            |
-| Push forward (128,0)    | Go forward               | +255        | +255         |
-| Pull backward (128,255) | Go backward              | -255        | -255         |
-| Push right (255,128)    | Turn right in place      | +255        | -255         |
-| Push left (0,128)       | Turn left in place       | -255        | +255         |
-| Forward + right         | Curve right while moving | +200        | +100         |
+| Centered                | No motion                | 0           | 0            |
+| Push forward            | Go forward               | +255        | +255         |
+| Pull backward           | Go backward              | -255        | -255         |
+| Forward + right         | Curve right while moving | +255        | +100         |
 | Forward + left          | Curve left while moving  | +100        | +200         |
+| Backward + right        | Curve right while moving | +200        | +100         |
+| Backward + left         | Curve left while moving  | +100        | +200         |
 
 
 # Setup & Configurations
