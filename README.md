@@ -2,7 +2,7 @@
 Build a competitive 500g class sumo robot from Cytron using a PS2 controller for wireless control and the Motion 2350 Pro board as the main controller
 
 # Overview
-| Component           | Details/Notes                                                         |
+| Component           | Details/Notes                                                         |  
 | ------------------- | --------------------------------------------------------------------- |
 | **Microcontroller** | Motion 2350 Pro( Dual-core Arm Cortex-M33 processor)(Arduino use core0|                  
 | **Motors**          | 12V 980RPM 2.3kgfcm GM25 High Power Brushed DC Geared Moto            |
