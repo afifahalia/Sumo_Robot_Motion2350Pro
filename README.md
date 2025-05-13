@@ -1,77 +1,23 @@
-# Sumo_Robot_Motion2350Pro
-Build a competitive 500g class sumo robot from Cytron using a PS2 controller for wireless control and the Motion 2350 Pro board as the main controller
+# Cytron-MOTION-2350-PRO  
+Build an advanced robot, minimize efforts on electronics, and focus on mechanics with [MOTION 2350 PRO](https://cytron.io/p-motion-2350-pro). Powered by the RP2350 microprocessor from Raspberry Pi, this platform delivers the processing power you need.  
 
-# Overview
-| Component           | Details/Notes                                                         |  
-| ------------------- | --------------------------------------------------------------------- |
-| **Microcontroller** | Motion 2350 Pro( Dual-core Arm Cortex-M33 processor)(Arduino use core0|                  
-| **Motors**          | 12V 980RPM 2.3kgfcm GM25 High Power Brushed DC Geared Moto            |
-| **Power Source**    | Mini LiPo Rechargeable Battery 3S 11.1V 2000mAH                       |
-| **Controller**      | PS2 wireless controller + receiver module (core 1)                    |
+![motion-2350-pro-pinout-diagram](https://github.com/CytronTechnologies/Cytron-MOTION-2350-PRO/blob/main/images/Pinout_Diagram_MOTION-2350-Pro.png)
 
-# Workflow
-![Sumo Robot](https://github.com/user-attachments/assets/1ed11242-cd27-499b-b096-7be169128817)
+## Requirements  
+To get started, you will need the following hardware and software:  
+**Hardware:**  
+* [MOTION 2350 Pro](https://cytron.io/p-motion-2350-pro)  
 
+**Software:**  
+To upload the code to the MOTION 2350 Pro, you need to install the CircuitPython firmware:
+* [MOTION 2350 Pro CircuitPython Firmware](https://circuitpython.org/board/cytron_motion_2350_pro/)
+  
+This firmware for MOTION 2350 Pro already pre-compiled some libraries that are used in the examples.
 
-# Configuration
+  
+## Resources 
+Feel free to visit our product page to check out other resources here:  
+* [Cytron MOTION 2350 Pro Product Resources](https://cytron.io/p-motion-2350-pro#tab-resource)  
 
-Since we are using Motion 2350 Pro which have dual core processor, we can separate usb and arduino logic process. To translate PS2 Joysticks controller, we need to identify each button configuration. Based on the configuration, we can set motor output which shows in serial output.
-
-| Action   | 0    | 1    | 2    | 3    | 4    | 5    | 6    | 7    | 8    | 9       | 10      | 11     | 12     | 13     | 14     | 15   | 16   | 17   | 18   | 19   | 20   |
-| -------- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ----    | ----    | ----   | ----   | ----   | ----   | ---- | ---- | ---- | ---- | ---- | ---- |
-| Centered | 0x00 | 0x14 | 0x00 | 0x00 | 0x00 | 0x00 | 0x00 | 0x00 | 0x00 | 0x00    | 0x00    | 0x00   | 0x00   | 0x00   | 0x00   | 0x00 | 0x00 | 0x00 | 0x00 | 0x00 | 0x00 |
-| Forward  | 0x00 | 0x14 | 0x00 | 0x00 | 0x00 | 0x00 | 0x00 | 0x00 | 0x00 | **0xFF**|**0x7F** | 0x00   | 0X00   |**0xFF**|**0x7F**| 0x00 | 0x00 | 0x00 | 0x00 | 0x00 | 0x00 |
-| Backward | 0x00 | 0x14 | 0x00 | 0x00 | 0x00 | 0x00 | 0x00 | 0x00 | 0x00 | 0x00    | **0x80**| 0x00   | 0x00   | 0x00   |**0x80**| 0x00 | 0x00 | 0x00 | 0x00 | 0x00 | 0x00 |
-| Right(F) | 0x00 | 0x14 | 0x00 | 0x00 | 0x00 | 0x00 | 0x00 | 0x00 | 0x00 | **0xFF**| **0x7F**|**0xFF**|**0x7F**| 0x00   | 0x00   | 0x00 | 0x00 | 0x00 | 0x00 | 0x00 | 0x00 |
-| Left(F)  | 0x00 | 0x14 | 0x00 | 0x00 | 0x00 | 0x00 | 0x00 | 0x00 | 0x00 | **0xFF**| **0x7F**| 0x00   |**0x80**| 0x00   | 0x00   | 0x00 | 0x00 | 0x00 | 0x00 | 0x00 | 0x00 |
-| Right(B) | 0x00 | 0x14 | 0x00 | 0x00 | 0x00 | 0x00 | 0x00 | 0x00 | 0x00 | 0x00    | **0x80**|**0xFF**|**0x7F**| 0x00   | 0x00   | 0x00 | 0x00 | 0x00 | 0x00 | 0x00 | 0x00 |
-| Left(B)  | 0x00 | 0x14 | 0x00 | 0x00 | 0x00 | 0x00 | 0x00 | 0x00 | 0x00 | 0x00    | **0x80**| 0x00   |**0x80**|0x00    | 0x00   | 0x00 | 0x00 | 0x00 | 0x00 | 0x00 | 0x00 |
-
-### Indicator of Mapping
-| Output(Bytes)         | Details/Notes                                                         |
-| ----------------------| --------------------------------------------------------------------- |
-| **0xFF**              | Push Max (+255)                                                       |
-| **0x00**              | Center (180)                                                          |
-| **0x80**              | At Minimum(-255)                                                      |
-
-Based on this indicator, we can assign direction and speed based on input. 
-
-If pin 8 = ff, direction forward
-	If pin 11 = FF, direction is right
-	Else direction is left
-Else if pin 8 = 80, direction backward
-	If pin = 11, direction is right
-	Else direction is left
-Else motor stop moving
-
-
-## Mapping 
-![ChatGPT Image May 11, 2025, 10_28_49 PM](https://github.com/user-attachments/assets/6a229fc0-8c45-4208-b9ac-332350e1b265)
-
-
-| Joystick Input          | Action                   | left\_speed | right\_speed |
-| ----------------------- | ------------------------ | ----------- | ------------ |
-| Centered                | No motion                | 0           | 0            |
-| Push forward            | Go forward               | +255        | +255         |
-| Pull backward           | Go backward              | -255        | -255         |
-| Forward + right         | Curve right while moving | +255        | -85          |
-| Forward + left          | Curve left while moving  | -85         | +255         |
-| Backward + right        | Curve right while moving | +255        | -85          |
-| Backward + left         | Curve left while moving  | -85         | +255         |
-
-
-## Setup
-| Pin         | Details/Notes                                                         |
-| ------------| --------------------------------------------------------------------- |
-| **8**       | Left Motor Forward(Red)                                               |
-| **9**       | Left Motor Backward(Black)                                            |
-| **14**      | Right Motor Forward(Red)                                              |
-| **15**      | Right Motor Backward(Black)                                           |
-| **24**      | D+ USB Controller                                                     |
-| **25**      | D- USB Controller                                                     |
-| **+**       | Power(Red)                                                            |
-| **-**       | GND(Black)                                                            |
-
-
-
-
+## Support  
+If you need further assistance, we welcome you to our [technical forum](http://forum.cytron.io) or you can contact us through email support@cytron.io where our team will be happy to assist you. 
