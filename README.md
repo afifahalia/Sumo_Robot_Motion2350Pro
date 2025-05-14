@@ -24,7 +24,8 @@ In this project, we are using Robot Battle (500g) - Motion 2350 Pro from Cytron 
 
 ### Mapping
 
-#### Input
+#### Input 
+When read input from joysticks, it will gives 20 bytes data which indicate movement for each joysticks
 | Input (Bytes) | Variables | Details                                   |
 |---------------|-----------|-----------------------------------        |
 |   1           | Throttle  | Act as throttle to move sumo robot        |
@@ -32,6 +33,8 @@ In this project, we are using Robot Battle (500g) - Motion 2350 Pro from Cytron 
 |   11          | Direction | Turn sumo robot to the left or right      |
 
 #### Output
+
+After read the different location of each joysticks, we can translate the joysticks movement into motor control logic
 | Output | Details                  |
 |-----   |--------------------------|
 | 0x14   | USB Detected             |
