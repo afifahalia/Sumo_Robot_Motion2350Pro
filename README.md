@@ -20,7 +20,7 @@ In this project, we are using Robot Battle (500g) - Motion 2350 Pro from Cytron 
 | 15  | Right Motor Backward(M4B)|
 
 ## Workflow
-
+![Sumo Robot drawio 2 drawio (1)](https://github.com/user-attachments/assets/4610c61e-daff-46e2-894c-34433b60239a)
 
 ### Mapping
 
